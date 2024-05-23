@@ -1,1 +1,2 @@
-# Tip-Calculator-Spring24
+# Tip Calculator (Spring 24)
+by Dupreece Kelley
