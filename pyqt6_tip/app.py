@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import (
     QApplication,
     QLabel,
     QSpinBox,
+    QDoubleSpinBox,
     QMainWindow,
     QVBoxLayout,
     QWidget,
@@ -28,9 +29,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
         self.calculate_button.clicked.connect(self.calculate_tip)
-
+         
+    # Layouts
     def create_widgets(self, main_layout):
-        title = QHBoxLayout()
+        title = QVBoxLayout()
         price = QHBoxLayout()
         percent = QHBoxLayout()
         results = QVBoxLayout()
@@ -45,10 +47,10 @@ class MainWindow(QMainWindow):
         # Price widgets
         price_label = QLabel("Price of Meal")
         price_label.setFont(QFont("Libre Baskerville", 15))
-        self.price_spinbox = QSpinBox()
+        self.price_spinbox = QDoubleSpinBox()
         price.addWidget(price_label)
         price.addWidget(self.price_spinbox)
-        self.price_spinbox.setMaximum(1000)
+        self.price_spinbox.setMaximum(10000)
         self.price_spinbox.setMinimum(0)
 
         # Percent widgets
@@ -62,7 +64,7 @@ class MainWindow(QMainWindow):
 
         # Results widgets
         results_label = QLabel("Results")
-        results_label.setAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignBottom)
+        results_label.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom)
         results_label.setFont(QFont("Libre Baskerville Bold 700", 20))
         self.results_display = QLineEdit()
         self.calculate_button = QPushButton("Calculate")
@@ -71,11 +73,13 @@ class MainWindow(QMainWindow):
         results.addWidget(self.results_display)
         results.addWidget(self.calculate_button)
 
+        # Adding to layouts
         main_layout.addLayout(title)
         main_layout.addLayout(percent)
         main_layout.addLayout(price)
         main_layout.addLayout(results)
-
+    
+    # Functionality
     def calculate_tip(self):
         try:
             price = self.price_spinbox.value()
